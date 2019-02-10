@@ -8,11 +8,6 @@
 ########                              Data Input Variables                              ########
 ################################################################################################
 
-variable "virtual_network_resource_group_location" {
-    description = ""
-    type        = "string"
-}
-
 variable "virtual_network_resource_group_name" {
     description = ""
     type        = "string"
@@ -21,6 +16,11 @@ variable "virtual_network_resource_group_name" {
 ################################################################################################
 ########                                 Module Variables                               ########
 ################################################################################################
+
+variable "virtual_network_name" {
+    description = ""
+    type        = "string"
+}
 
 variable "virtual_network_address_space" {
     description = ""
