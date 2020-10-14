@@ -14,10 +14,19 @@ See the License for the specific language governing permissions and
 limitations under the License. 
 */
 
-output "virtual_network_name" {
-	value = azurerm_virtual_network.this.name
+# Configure the Terraform settings
+terraform {  
+  required_version = ">= 0.13.0, < 0.14"
+  required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+      version = ">= 2.20.0, <= 2.30.0"
+    }
+  }
 }
 
-output "virtual_network_address_space" {
-	value = azurerm_virtual_network.this.address_space
+# Configure the Azure provider
+provider "azurerm" {
+  # Configuration options
+  features {}
 }

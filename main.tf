@@ -14,10 +14,26 @@ See the License for the specific language governing permissions and
 limitations under the License. 
 */
 
-output "virtual_network_name" {
-	value = azurerm_virtual_network.this.name
-}
+resource "azurerm_virtual_network" "this" {
+  location            = data.azurerm_resource_group.this.location
+  resource_group_name = data.azurerm_resource_group.this.name
+  name                = var.name
+  address_space       = var.address_space
+  dns_servers         = var.dns_servers
+  
+  dynamic "subnet" {
+    for_each = var.subnets
+    content {
+      name           = subnet.value.name
+      address_prefix = subnet.value.address_prefix
+    }
+  }
 
-output "virtual_network_address_space" {
-	value = azurerm_virtual_network.this.address_space
+  tags = merge(
+    {
+      "name"     = format("%s", var.name)
+      "resource" = "virtual_network"
+    },
+    var.tags,
+  )
 }
